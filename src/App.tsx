@@ -2,6 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+// Let's make a to do app with Zustand. 
+
 function App() {
   return (
     <div className="App">
