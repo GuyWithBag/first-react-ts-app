@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Task } from "../utils/task";
 import { useTrashStore } from "./TrashStore";
-import { addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, query, updateDoc } from "firebase/firestore";
+import { DocumentReference, addDoc, collection, deleteDoc, doc, getDoc, onSnapshot, query, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const store = (set: any) => ({
@@ -31,11 +31,11 @@ const store = (set: any) => ({
         const task = Task.create(title)
         await addDoc(collection(db, 'todos'), task.toJson())
     }, 
-    addExistingTask: (task: Task) => (
-        set((store: any) => ({
-            tasks: [...store.tasks, task]
-        }))
-    ), 
+    addExistingTask: async (taskDocRef: DocumentReference) => {
+        const docSnap = await getDoc(taskDocRef); 
+        const task: Task = Task.load(docSnap)
+        await addDoc(collection(db, 'todos'), task.toJson())
+    },
     deleteTask: async (id: string) => {
         let trash = useTrashStore.getState() 
         const taskDocRef = doc(db, 'todos', id);

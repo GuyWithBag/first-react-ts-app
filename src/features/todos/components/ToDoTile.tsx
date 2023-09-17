@@ -53,12 +53,12 @@ export default function ToDoTile({ data, isTrash }: Props) {
               }}
             /> 
           </Box>
-          <IconButton aria-label='Delete' icon={<AiOutlineDelete size={'2em'}/>} variant='ghost' onClick={() => deleteTask(data.id)} />
           <Box className={`${isTrash === true ? '' : 'hidden'}`}>
-            <Button className='hidden' onClick={() => restoreTrash(data)}>
+            <Button className='hidden' onClick={() => restoreTrash(data.id)}>
                 <Text>Restore Task</Text>
             </Button>
           </Box>
+          <IconButton aria-label='Delete' icon={<AiOutlineDelete size={'2em'}/>} variant='ghost' onClick={() => deleteTask(data.id)} />
         </Box>
     </Box>
   )
