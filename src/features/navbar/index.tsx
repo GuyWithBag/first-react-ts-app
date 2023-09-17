@@ -7,7 +7,7 @@ import {
   useDisclosure, 
   Box
 } from '@chakra-ui/react'
-import AddTaskModal from './components/AddTaskModal'
+import CreateTaskModal from './components/CreateTaskModal'
 
 type Props = {}
 
@@ -17,7 +17,7 @@ export default function NavBar({}: Props) {
 
   return (
     <>
-      <AddTaskModal isOpen={isOpen} onClose={onClose}/>
+      <CreateTaskModal isOpen={isOpen} onClose={onClose}/>
       <nav className='text-white h-16 flex items-center p-5 fixed w-[100%] bg-[#088395] shadow-md'>
           <Box className='flex flex-row gap-5 items-center justify-between w-[100%]'>
               <h1 className="text-2xl font-bold font-white ">To Do App</h1>

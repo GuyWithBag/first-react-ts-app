@@ -17,7 +17,6 @@ export default function ToDos({}: Props) {
       })}
       <Box className='flex flex-col items-center justify-between'>
         <Box className=' bg-red-500 w-[100%]'><Text>MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmmmmmmmmmmmmmmmmmmmmmmmm</Text></Box>
-
       </Box>
     </Box>
   )

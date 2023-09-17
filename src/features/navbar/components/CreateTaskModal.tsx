@@ -21,9 +21,9 @@ type Props = {
     onClose(): void, 
 }
 
-export default function AddTaskModal({ isOpen, onClose }: Props) {
+export default function CreateTaskModal({ isOpen, onClose }: Props) {
 
-    let addTask = useTasksStore(task => task.addTask)
+    let createTask = useTasksStore(task => task.createTask)
 
     function validateTask(value: string): string {
         let error: string = ""
@@ -34,7 +34,7 @@ export default function AddTaskModal({ isOpen, onClose }: Props) {
     }
 
     function createNewTask(name: string) {
-        addTask(name)
+        createTask(name)
     }
 
     return (

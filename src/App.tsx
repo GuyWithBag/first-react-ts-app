@@ -11,6 +11,7 @@ import { query, collection, onSnapshot } from 'firebase/firestore'
 import { db } from './firebase';
 import { useTasksStore } from './data/TasksStore'
 import { Task } from './utils/task';
+import { useTrashStore } from './data/TrashStore';
 
 // Let`'s make a to do app with Zustand. 
 
@@ -19,18 +20,38 @@ import { Task } from './utils/task';
 
 function App() {
   let setTasks = useTasksStore(store => store.setTasks)
+  let setTrash = useTrashStore(store => store.setTrash)
+  // let queryTasks = useTasksStore(store => store.queryTasks)
   useEffect(() => {
     const q = query(collection(db, 'todos'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr: Task[] = []
       querySnapshot.forEach((doc) => {
-        let task = Task.load(doc)
+        let task = Task.loadQuery(doc)
         // task.id = doc.id
         todosArr.push(task)
       })
       setTasks(todosArr)
     })
     return () => unsubscribe()
+    // let unsubscribe = queryTasks()
+    // return () => _unsubscribe()
+  }, [])
+
+  useEffect(() => {
+    const q = query(collection(db, 'trash'))
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let trashArr: Task[] = []
+      querySnapshot.forEach((doc) => {
+        let task = Task.loadQuery(doc)
+        // task.id = doc.id
+        trashArr.push(task)
+      })
+      setTrash(trashArr)
+    })
+    return () => unsubscribe()
+    // let unsubscribe = queryTasks()
+    // return () => _unsubscribe()
   }, [])
 
   return (

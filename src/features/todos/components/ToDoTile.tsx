@@ -19,14 +19,14 @@ type Props = {
     isTrash?: boolean
 } 
 
-export default function ToDoTile({ data, isTrash}: Props) {
+export default function ToDoTile({ data, isTrash }: Props) {
   let storeDeleteTask  = useTasksStore(store => store.deleteTask)
   let checkTask = useTasksStore(store => store.checkTask)
   let deleteTrash = useTrashStore(store => store.deleteTrash)
   let restoreTrash = useTrashStore(store => store.restoreTrash)
 
   function deleteTask(id: string) {
-    if (isTrash == true) {
+    if (isTrash === true) {
       deleteTrash(id)
       return
     }
@@ -44,7 +44,7 @@ export default function ToDoTile({ data, isTrash}: Props) {
           <Text>{data.title}</Text>
         </Box>
         <Box className='flex flex-row gap-6'>
-          <Box className={`flex items-center ${isTrash == true ? 'hidden' : ''}`}>
+          <Box className={`flex items-center ${isTrash === true ? 'hidden' : ''}`}>
             <Checkbox 
               isChecked={data.checked} 
               
@@ -54,7 +54,7 @@ export default function ToDoTile({ data, isTrash}: Props) {
             /> 
           </Box>
           <IconButton aria-label='Delete' icon={<AiOutlineDelete size={'2em'}/>} variant='ghost' onClick={() => deleteTask(data.id)} />
-          <Box className={`${isTrash == true ? '' : 'hidden'}`}>
+          <Box className={`${isTrash === true ? '' : 'hidden'}`}>
             <Button className='hidden' onClick={() => restoreTrash(data)}>
                 <Text>Restore Task</Text>
             </Button>
